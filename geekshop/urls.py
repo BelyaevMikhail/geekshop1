@@ -1,5 +1,5 @@
 # from django.conf.urls import url, include
-from django.conf.urls import include
+from django.conf.urls import include, path
 from django.contrib import admin
 import mainapp.views as mainapp
 
@@ -14,8 +14,10 @@ urlpatterns = [
     re_path(r'^contact/', mainapp.contact, name='contact'),
     re_path(r'^auth/', include('authapp.urls', namespace='auth')),
     re_path(r'^basket/', include('basketapp.urls', namespace='basket')),
-
+    path('', include('social_django.urls', namespace='social')),
     re_path(r'^admin/', include('adminapp.urls', namespace='admin')),
+
+    path('order/', include('ordersapp.urls', namespace='order'))
 ]
 
 if settings.DEBUG:
