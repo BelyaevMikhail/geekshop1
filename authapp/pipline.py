@@ -2,19 +2,20 @@ from datetime import datetime
 
 from django.contrib.sites import requests
 from django.utils import timezone
+from social_core.exceptions import AuthForbidden
 
 from authapp.models import ShopUserProfile
 
 
 def save_user_profile(backend, user, response, *args, **kwargs):
-    if backend != 'vk-oauth2'
+    if backend != 'vk-oauth2':
         return
 
     api_url = f"https://api.vk.com/method/users.get?fieleds=bdate,sex,about&access token={response['access_token']}"
 
     vk_response = requests.get(api_url)
 
-    if vk_response.ststus_code != 200
+    if vk_response.ststus_code != 200:
         return
 
     vk_data = vk_response.json(['response'][0])
