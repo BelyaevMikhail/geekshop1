@@ -2,6 +2,7 @@ import self as self
 from django.conf import settings
 from django.db import models
 
+from basketapp.models import Basket
 from mainapp.models import Product
 
 
@@ -49,6 +50,10 @@ class Order(models.Model):
 
         self.is_active = False
         self.save()
+
+    @staticmethod
+    def get_item(pk):
+        return Order.objects.get(pk=pk)
 
 
 class OrderItem(models.Model):
